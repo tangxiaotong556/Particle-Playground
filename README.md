@@ -1,5 +1,9 @@
 # Particle Playground · 3D 粒子互动实验室
 
+![运行效果：12,000 粒子 · 爆发模式 · 极光主题](docs/screenshot.png)
+
+> 截图为运行实况：12,000 粒子、爆发模式、极光主题，右上为可交互控制面板。
+
 用 **Vite + TypeScript + Three.js** 从零搭建的浏览器粒子实验项目（阶段一：CPU 粒子运动）。
 目标是把每个概念做小做清晰，方便逐步理解 Web3D 渲染管线，而不是一次性上 GPU Compute。
 
