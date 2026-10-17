@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Particle Playground · 3D 粒子实验室</title>
+  </head>
+  <body>
+    <!-- WebGL 画布：由 SceneManager 接管，负责渲染一切 3D 内容 -->
+    <canvas id="stage"></canvas>
+    <!-- 纯 CSS 暗角层，增强画面纵深感（不参与渲染计算） -->
+    <div id="vignette"></div>
+
+    <!-- 左上角性能信息（HUD）：FPS / 粒子数 / 运行状态，数据来自真实运行时统计 -->
+    <header id="hud">
+      <div class="hud-item"><span class="hud-label">FPS</span><span id="hud-fps" class="hud-value">--</span></div>
+      <div class="hud-item"><span class="hud-label">粒子</span><span id="hud-count" class="hud-value">--</span></div>
+      <div class="hud-item"><span class="hud-label">状态</span><span id="hud-status" class="hud-value hud-running">运行中</span></div>
+    </header>
+
+    <!-- 右侧控制面板：所有控件都会真正接入粒子系统 -->
+    <aside id="panel">
+      <h1 class="panel-title">Particle <span>Playground</span></h1>
+      <p class="panel-sub">Three.js · CPU 粒子实验</p>
+
+      <section class="group">
+        <div class="group-label">运动模式</div>
+        <div class="seg" id="mode-buttons">
+          <button class="seg-btn active" data-mode="float" type="button">漂浮</button>
+          <button class="seg-btn" data-mode="vortex" type="button">漩涡</button>
+          <button class="seg-btn" data-mode="burst" type="button">爆发</button>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-label">鼠标作用</div>
+        <div class="seg" id="mouse-buttons">
+          <button class="seg-btn active" data-mouse="attract" type="button">吸引</button>
+          <button class="seg-btn" data-mouse="repel" type="button">排斥</button>
+          <button class="seg-btn" data-mouse="vortex" type="button">旋涡</button>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-label">颜色主题</div>
+        <div class="themes" id="theme-buttons">
+          <button class="theme-btn active" data-theme="aurora" type="button"><i class="swatch sw-aurora"></i>极光</button>
+          <button class="theme-btn" data-theme="nebula" type="button"><i class="swatch sw-nebula"></i>星云</button>
+          <button class="theme-btn" data-theme="moon" type="button"><i class="swatch sw-moon"></i>月神</button>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-label">粒子数量</div>
+        <select id="count-select" class="select">
+          <option value="2000">2,000</option>
+          <option value="5000" selected>5,000</option>
+          <option value="8000">8,000</option>
+          <option value="12000">12,000</option>
+        </select>
+      </section>
+
+      <section class="group">
+        <div class="group-label">运动速度 <span id="speed-value" class="value-tag">×1.00</span></div>
+        <input id="speed-range" class="range" type="range" min="0.2" max="3" step="0.05" value="1" />
+      </section>
+
+      <div class="actions">
+        <button id="pause-btn" class="btn" type="button">暂停</button>
+        <button id="reset-btn" class="btn ghost" type="button">重置</button>
+      </div>
+    </aside>
+
+    <footer id="hint">移动鼠标影响粒子 · 左键拖拽旋转 · 滚轮缩放</footer>
+
+    <!-- WebGL 初始化失败时的提示层 -->
+    <div id="fallback" hidden>
+      <p>页面没能启动 WebGL 渲染。</p>
+      <p class="fallback-sub">请先尝试：浏览器设置开启硬件加速并重启浏览器后，刷新页面。</p>
+      <p class="fallback-sub">下面是具体失败原因（可截图反馈）：</p>
+      <pre id="fallback-detail"></pre>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
